@@ -1,16 +1,18 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackMd5Hash = require('webpack-md5-hash')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 
 const {
   prod_Path,
   src_Path
-} = require('./path');
+} = require('./path')
 const {
   selectedPreprocessor
-} = require('./loader');
+} = require('./loader')
 
 module.exports = {
   entry: {
@@ -22,31 +24,37 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
+    },
+    {
+      test: selectedPreprocessor.fileRegexp,
+      use: [{
+        loader: MiniCssExtractPlugin.loader
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          minimize: true
         }
       },
       {
-        test: selectedPreprocessor.fileRegexp,
-        use: [{
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-          },
-          {
-            loader: selectedPreprocessor.loaderName
-          }
-        ]
+        loader: 'postcss-loader'
       },
+      {
+        loader: selectedPreprocessor.loaderName
+      }
+      ]
+    },
+    {
+      test: /\.(png|svg|jpg|gif|txt)$/,
+      use: [
+        'file-loader'
+      ]
+    }
     ]
   },
   plugins: [
@@ -62,6 +70,14 @@ module.exports = {
       template: './' + src_Path + '/index.html',
       filename: 'index.html'
     }),
-    new WebpackMd5Hash()
+    new CopyWebpackPlugin([{
+      from: './' + src_Path + '/image/',
+      to: path.resolve(__dirname, prod_Path) + '/image/'
+    }]),
+    new WebpackMd5Hash(),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ]
-};
+}

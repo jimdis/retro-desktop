@@ -9,10 +9,10 @@ import './js/twenty-one/twenty-one'
 let desktop = new Desktop()
 document.body.querySelector('main').appendChild(desktop.container)
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('./sw.js').then((reg) => {
-//     console.log('Registration succeeded. Scope is ' + reg.scope)
-//   }).catch((error) => {
-//     console.log('Registration failed with ' + error)
-//   })
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js').then((reg) => {
+    console.log('Registration succeeded. Scope is ' + reg.scope)
+  }).catch((error) => {
+    console.log('Registration failed with ' + error)
+  })
+}

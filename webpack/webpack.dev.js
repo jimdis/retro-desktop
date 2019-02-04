@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 
 const {
   prod_Path,
@@ -89,6 +90,10 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './' + src_Path + '/image/',
       to: path.resolve(__dirname, prod_Path) + '/image/'
-    }], { debug: 'info' })
+    }]),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ]
 }

@@ -166,7 +166,7 @@ cardTemplate.innerHTML = /* html */`
 <div class="row"></div>
 <div class="card">
 <button tabindex="1">
-<img class="faceDown" src="../image/0.png">
+<img class="faceDown" src="./image/0.png">
 </button>
 </div>
 `

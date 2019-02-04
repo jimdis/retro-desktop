@@ -5,6 +5,8 @@
  * https://developers.google.com/web/fundamentals/codelabs/offline/
  * and
  * https://youtu.be/ksXwaWHCW6k
+ *
+ * This is not used in the webpack build.
  */
 
 const CACHE_NAME = 'jim-v2'

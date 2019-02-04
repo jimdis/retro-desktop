@@ -41,7 +41,7 @@ template.innerHTML = /* html */`
 #background {
     position: relative;
     height: 200px;
-    background: url(../image/twenty-one-bg.gif);
+    background: url(./image/twenty-one-bg.gif);
     background-repeat: no-repeat;
     background-size: 400px 200px;
 }

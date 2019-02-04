@@ -1,0 +1,9 @@
+#Rules of the Game!
+
+This is sort of like Black Jack, but the dealer can't see your cards.
+
+If you get 21 or five cards without reaching 21, you win. Same for dealer.
+
+Scoring as in Black Jack.
+
+Image Source: http://redrescue.tumblr.com

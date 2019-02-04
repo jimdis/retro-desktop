@@ -1,0 +1,317 @@
+html,
+body {
+  height: 100%;
+  font-smooth: none;
+  -webkit-font-smoothing: none;
+}
+
+img {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+}
+
+body,
+a,
+button {
+  cursor: url(../image/cursor.png), auto;
+}
+
+body {
+  background-color: #42a1c5;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#site-title h1,
+#site-title h2 {
+
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  letter-spacing: -2px;
+  text-align: center;
+  text-shadow: 2px 3px grey;
+
+}
+
+#site-title h1 {
+  font-size: 60px;
+  line-height: 45px;
+  font-variant: small-caps;
+  margin: 50px 0 20px;
+}
+
+#site-title h2 {
+  font-size: 30px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:link,
+a:visited {
+  color: black;
+}
+
+#icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.window {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+  box-shadow: 0px 0px 0px 3px black;
+  outline: 2px solid silver;
+
+}
+
+div.navbar {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  background-color: white;
+  border-bottom: 1px solid black;
+  text-align: center;
+  cursor: move;
+}
+
+.navbar-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.navbar-menu {
+  display: none;
+}
+
+.navbar-menu.display-menu {
+  background-color: white;
+  display: block;
+  width: 150px;
+  position: absolute;
+  top: 25px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid grey;
+  z-index: 999;
+}
+
+.navbar-menu li {
+  display: block;
+  list-style: none;
+  line-height: 1.5;
+}
+
+.navbar-menu a {
+  display: block;
+  padding-left: 5px;
+  text-align: left;
+}
+
+.navbar-menu a:hover .navbar-menu a:focus {
+  background-color: grey;
+  color: white;
+}
+
+.navbar-name {
+  display: inline-block;
+  line-height: 25px;
+  color: black;
+  vertical-align: middle;
+
+}
+
+div.active div.navbar {
+  background-color: navy;
+}
+
+.navbar-buttons {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  height: 24px;
+}
+
+a.navbar-button {
+  width: 21px;
+  height: 24px;
+}
+
+.navbar a:hover>img {
+  transform: translate(0px, 1px);
+}
+
+img.navbar-button.minimize {
+  border-left: 1px solid black;
+  border-right: 1px solid black
+}
+
+img.navbar-button.maximize {
+  border-left: 1px solid black;
+}
+
+div.menu {
+  width: 100%;
+  height: 24px;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu ul li {
+  display: block;
+  position: relative;
+  float: left;
+}
+
+.navbar-menu li:hover {
+  background-color: silver;
+}
+
+a.menu-item {
+  padding: 0 0 0 6px;
+  min-width: 50px;
+  line-height: 25px;
+}
+
+.menu li ul {
+  background-color: white;
+  display: none;
+  border: 1px solid grey;
+  z-index: 999;
+}
+
+.menu ul li a {
+  display: block;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+ul.menu-active li:hover>ul,
+.menu li ul.focused-menu {
+  display: block;
+  position: absolute;
+}
+
+ul.focused-menu li {
+  float: none;
+}
+
+.menu ul.display-menu {
+  display: block;
+  position: absolute;
+}
+
+.menu li:hover li {
+  float: none;
+}
+
+.menu li {
+  background-color: white;
+}
+
+.menu li.menu-arrow>a {
+  min-width: 120px;
+}
+
+.menu li.menu-arrow>a::after {
+  content: '➤';
+  color: grey;
+  font-size: 75%;
+  display: block;
+  float: right;
+}
+
+.menu li:hover,
+.menu li a:focus {
+  background-color: silver;
+  outline: none;
+}
+
+.menu ul ul ul {
+  left: 100%;
+  top: -1px;
+}
+
+.menu ul:before,
+.menu ul:after {
+  content: " ";
+  display: table;
+}
+
+.menu ul:after {
+  clear: both;
+}
+
+.menu a::first-letter {
+  text-decoration: underline;
+}
+
+.sub-menu a::first-letter {
+  text-decoration: none;
+}
+
+div.icon {
+  position: absolute;
+}
+
+a.icon span {
+  display: block;
+  width: 75px;
+  font-size: 15px;
+  text-align: center;
+}
+
+img.icon {
+  display: block;
+  width: 60px;
+  margin: auto;
+}
+
+div.window {
+  z-index: 2;
+}
+
+div.window.active {
+  z-index: 3;
+}
+
+.active .navbar {
+  color: white;
+}
+
+div.icon.active {
+  z-index: 2;
+}
+
+div.icon.active span {
+  background: #42a1c5;
+}
+
+.hidden {
+  display: none;
+}
+
+twenty-one {
+  width: 300px;
+}

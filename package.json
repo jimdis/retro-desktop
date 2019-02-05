@@ -8,8 +8,12 @@
     "build:prod": "webpack --env prod --mode production",
     "build:watch": "webpack-dev-server --env dev --mode none"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimdis/retro-desktop.git"
+  },
   "author": "Jim Disenstam",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^8.6.0",
     "babel-core": "^6.26.3",

@@ -7,7 +7,7 @@
     "build:dev": "webpack-dev-server --env dev --mode none --open 'Google Chrome'",
     "build:prod": "webpack --env prod --mode production",
     "build:watch": "webpack-dev-server --env dev --mode none",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",

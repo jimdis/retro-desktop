@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackMd5Hash = require('webpack-md5-hash')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { GenerateSW } = require('workbox-webpack-plugin')
@@ -74,6 +75,7 @@ module.exports = {
       from: './' + src_Path + '/image/',
       to: path.resolve(__dirname, prod_Path) + '/image/'
     }]),
+    new OptimizeCssAssetsPlugin({}),
     new WebpackMd5Hash(),
     new GenerateSW({
       clientsClaim: true,

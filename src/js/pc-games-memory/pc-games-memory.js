@@ -91,6 +91,7 @@ p.console {
 }
 
 #left-column {
+    margin-top: 5px;
     width: 70px;
     float: left;
 }

@@ -1,7 +1,6 @@
-import 'normalize.css'
+// import 'normalize.css'
 import './styles/style.scss'
 
-// import './sw'
 import Desktop from './js/Desktop'
 import './js/pc-games-memory/pc-games-memory'
 import './js/twenty-one/twenty-one'

@@ -7,13 +7,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { GenerateSW } = require('workbox-webpack-plugin')
 
-const {
-  prod_Path,
-  src_Path
-} = require('./path')
-const {
-  selectedPreprocessor
-} = require('./loader')
+const { prod_Path, src_Path } = require('./path')
+const { selectedPreprocessor } = require('./loader')
 
 module.exports = {
   entry: {
@@ -24,44 +19,42 @@ module.exports = {
     filename: '[name].[chunkhash].js'
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader'
-      }
-    },
-    {
-      test: selectedPreprocessor.fileRegexp,
-      use: [{
-        loader: MiniCssExtractPlugin.loader
-      },
+    rules: [
       {
-        loader: 'css-loader',
-        options: {
-          minimize: true
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
         }
       },
       {
-        loader: 'postcss-loader'
+        test: selectedPreprocessor.fileRegexp,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: selectedPreprocessor.loaderName
+          }
+        ]
       },
       {
-        loader: selectedPreprocessor.loaderName
+        test: /\.(png|svg|jpg|gif|txt)$/,
+        use: ['file-loader']
       }
-      ]
-    },
-    {
-      test: /\.(png|svg|jpg|gif|txt)$/,
-      use: [
-        'file-loader'
-      ]
-    }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(path.resolve(__dirname, prod_Path), {
-      root: process.cwd()
-    }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css'
     }),
@@ -71,10 +64,12 @@ module.exports = {
       template: './' + src_Path + '/index.html',
       filename: 'index.html'
     }),
-    new CopyWebpackPlugin([{
-      from: './' + src_Path + '/image/',
-      to: path.resolve(__dirname, prod_Path) + '/image/'
-    }]),
+    new CopyWebpackPlugin([
+      {
+        from: './' + src_Path + '/image/',
+        to: path.resolve(__dirname, prod_Path) + '/image/'
+      }
+    ]),
     new OptimizeCssAssetsPlugin({}),
     new WebpackMd5Hash(),
     new GenerateSW({

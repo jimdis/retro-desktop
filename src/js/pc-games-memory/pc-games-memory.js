@@ -37,7 +37,7 @@ img.faceUp {
     margin-top: 10px;
     margin-bottom: 60px;
     padding: 0;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #output {

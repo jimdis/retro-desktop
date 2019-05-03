@@ -12,11 +12,11 @@ const { selectedPreprocessor } = require('./loader')
 
 module.exports = {
   entry: {
-    main: './' + src_Path + '/index.js'
+    main: './' + src_Path + '/index.js',
   },
   output: {
     path: path.resolve(__dirname, prod_Path),
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -24,57 +24,59 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: selectedPreprocessor.fileRegexp,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
             options: {
-              minimize: true
-            }
+              minimize: true,
+            },
           },
           {
-            loader: 'postcss-loader'
+            loader: 'postcss-loader',
           },
           {
-            loader: selectedPreprocessor.loaderName
-          }
-        ]
+            loader: selectedPreprocessor.loaderName,
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif|txt)$/,
-        use: ['file-loader']
-      }
-    ]
+        use: ['file-loader'],
+      },
+    ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(path.resolve(__dirname, prod_Path), {
+      root: process.cwd(),
+    }),
     new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css'
+      filename: 'style.[contenthash].css',
     }),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
       template: './' + src_Path + '/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
     }),
     new CopyWebpackPlugin([
       {
         from: './' + src_Path + '/image/',
-        to: path.resolve(__dirname, prod_Path) + '/image/'
-      }
+        to: path.resolve(__dirname, prod_Path) + '/image/',
+      },
     ]),
     new OptimizeCssAssetsPlugin({}),
     new WebpackMd5Hash(),
     new GenerateSW({
       clientsClaim: true,
-      skipWaiting: true
-    })
-  ]
+      skipWaiting: true,
+    }),
+  ],
 }
